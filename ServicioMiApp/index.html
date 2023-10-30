@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Aplicación</title>
+    <style>
+        /* Estilos básicos */
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Mi Aplicación</h1>
+
+    <!-- Botones para hacer las llamadas a los servicios -->
+    <button onclick="fetchRESTData()">Llamar Servicio REST</button>
+
+    <!-- Aquí mostraremos los resultados -->
+    <div id="results"></div>
+
+    <script>
+        function fetchRESTData() {
+            // Crear una nueva instancia de XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+
+            // Configurar la solicitud
+            xhr.open('GET', 'http://localhost:4000', true);
+
+            // Configurar el tipo de respuesta esperado
+            xhr.responseType = 'json';
+
+            // Definir lo que sucederá cuando la solicitud se complete
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // En este ejemplo, suponemos que el servicio REST devuelve un objeto JSON
+                    document.getElementById('results').textContent = JSON.stringify(xhr.response);
+                } else {
+                    document.getElementById('results').textContent = 'Error al hacer la llamada: ' + xhr.status;
+                }
+            };
+
+            // Enviar la solicitud
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
